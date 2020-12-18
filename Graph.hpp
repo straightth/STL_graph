@@ -298,7 +298,6 @@ public:
         while (firstVertex != nullptr) {
             Vertex<vertexValueType, edgeValueType> *temp = firstVertex;
             firstVertex = firstVertex->nextVertex;
-            delete temp;
         }
         vertexAmount = 0;
     }
@@ -335,7 +334,7 @@ public:
         Vertex<vertexValueType, edgeValueType> *temp = firstVertex;
         while (temp != &vertex) temp = temp->nextVertex;
         temp->previousVertex = temp->nextVertex;
-        temp->nextVertex->previousVertex = temp->previousVertex;
+        if (temp->nextVertex != nullptr) temp->nextVertex->previousVertex = temp->previousVertex;
         if (temp == firstVertex) firstVertex = firstVertex->nextVertex;
         else if (temp == lastVertex) lastVertex = lastVertex->previousVertex;
         delete temp;

@@ -65,5 +65,52 @@ TEST_F(TestGraph, TestVertexAndVertexIterator) { //Test vertex methods
 }
 
 TEST_F(TestGraph, TestEdgeAndEdgeIterator) {
-    ASSERT_EQ(1, 1);
+    int firstValue = 1;
+    graph.addVertex(firstValue);
+    ASSERT_EQ(0, graph[0].size());
+    ASSERT_EQ(true, graph[0].empty());
+    graph[0].addEdge(firstValue, graph[1]);
+    ASSERT_EQ(false, graph[0].empty());
+    auto j = graph[0].begin();
+    ASSERT_EQ(firstValue, (*j)->getContent());
+    ASSERT_EQ(firstValue, graph[0][0].getContent());
+    ASSERT_EQ((*j), &graph[0][0]);
+    int secondValue = 2;
+    graph[0].addEdge(secondValue, graph[1]);
+    ASSERT_EQ(2, graph[0].size());
+    ++j;
+    ASSERT_EQ(secondValue, (*j)->getContent());
+    ASSERT_EQ(secondValue, graph[0][1].getContent());
+    ASSERT_EQ((*j), &graph[0][1]);
+    --j;
+    ASSERT_EQ(firstValue, (*j)->getContent());
+    ASSERT_EQ(firstValue, graph[0][0].getContent());
+    ASSERT_EQ((*j), &graph[0][0]);
+    ++++j;
+    ASSERT_EQ(j, graph[0].end());
+    --j;
+    graph[0].deleteEdge(graph[0][0]);
+    ASSERT_EQ(1, graph[0].size());
+    ASSERT_EQ(secondValue, (*j)->getContent());
+    ASSERT_EQ(secondValue, graph[0][0].getContent());
+    ASSERT_EQ((*j), &graph[0][0]);
+    int thirdValue = 5;
+    graph[0].addEdge(thirdValue, graph[1]);
+    ASSERT_EQ(2, graph[0].size());
+    ++j;
+    ASSERT_EQ(thirdValue, (*j)->getContent());
+    ASSERT_EQ(thirdValue, graph[0][1].getContent());
+    ASSERT_EQ((*j), &graph[0][1]);
+    graph[0].deleteEdge(graph[0][0]);
+    ASSERT_EQ(1, graph[0].size());
+    --j;
+    ASSERT_EQ(thirdValue, (*j)->getContent());
+    ASSERT_EQ(thirdValue, graph[0][0].getContent());
+    ASSERT_EQ((*j), &graph[0][0]);
+    auto i = graph[0].begin();
+    ASSERT_EQ((*j), (*i));
+    i = graph[0].end();
+    --i;
+    ASSERT_EQ((*j), (*i));
+    ASSERT_EQ(true, graph[0].edgeExists(graph[0][0]));
 }
