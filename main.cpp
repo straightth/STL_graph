@@ -7,7 +7,7 @@ protected:
     TestGraph() = default;
 };
 
-TEST_F(TestGraph, TestVertexAndVertexIterator) { //Test add vertex and delete vertex methods
+TEST_F(TestGraph, TestVertexAndVertexIterator) { //Test vertex methods
     int firstValue = 3;
     ASSERT_EQ(0, graph.size());
     ASSERT_EQ(true, graph.empty());
@@ -64,6 +64,6 @@ TEST_F(TestGraph, TestVertexAndVertexIterator) { //Test add vertex and delete ve
     ASSERT_EQ(0, graph.size());
 }
 
-TEST_F(TestGraph, Test) {
+TEST_F(TestGraph, TestEdgeAndEdgeIterator) {
     ASSERT_EQ(1, 1);
 }
